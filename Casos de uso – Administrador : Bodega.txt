@@ -1,0 +1,15 @@
+%% Casos de uso ZenForce Shop - Administración y Operaciones
+flowchart LR
+  subgraph Actores
+    B[Administrador]
+    D[Bodega/Operario]
+  end
+
+  subgraph Casos_de_Uso
+    UC07((UC07 Administrar Catálogo))
+    UC08((UC08 Administrar Pedidos))
+    UC09((UC09 Promociones/Cupones))
+  end
+
+  B --- UC07 & UC08 & UC09
+  D --- UC08

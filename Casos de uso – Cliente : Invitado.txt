@@ -1,0 +1,18 @@
+%% Casos de uso ZenForce Shop - Cliente e Invitado
+flowchart LR
+  subgraph Actores
+    A[Cliente]
+    G[Invitado]
+  end
+
+  subgraph Casos_de_Uso
+    UC01((UC01 Autenticación/Registro))
+    UC02((UC02 Explorar/Buscar Productos))
+    UC03((UC03 Gestionar Carrito))
+    UC04((UC04 Checkout y Pago))
+    UC05((UC05 Consultar Estado de Pedido))
+    UC06((UC06 Devoluciones/Cambios - RMA))
+  end
+
+  A --- UC01 & UC02 & UC03 & UC04 & UC05 & UC06
+  G --- UC02 & UC03 & UC04

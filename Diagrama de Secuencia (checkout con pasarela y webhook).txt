@@ -1,0 +1,25 @@
+sequenceDiagram
+  autonumber
+  actor U as Cliente
+  participant FE as Web/SPA
+  participant API as API Backend
+  participant PG as Pasarela de pagos
+  participant NF as Notificaciones
+  participant INV as Inventario
+  U->>FE: Confirmar checkout
+  FE->>API: POST /checkout (carrito, dirección, cupón)
+  API->>API: Recalcular totales (envío/impuestos/descuentos)
+  API->>PG: Crear intento de pago / tokenizar
+  PG-->>FE: Redirigir a 3DS / página de pago
+  U->>PG: Autenticación/confirmación
+  PG-->>API: Webhook (aprobado/rechazado/pendiente)
+  alt aprobado
+    API->>INV: Reservar/Rebajar stock
+    API->>API: Crear Pedido + Factura
+    API->>NF: Enviar confirmación al cliente
+    API-->>FE: Estado=Pagado, pedido confirmado
+  else rechazado
+    API-->>FE: Mostrar error / permitir reintento
+  else pendiente
+    API-->>FE: Mostrar estado Pendiente (esperando webhook)
+  end

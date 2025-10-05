@@ -1,0 +1,19 @@
+%% Casos de uso ZenForce Shop - Integraciones externas
+flowchart LR
+  subgraph Actores
+    P[Pasarela de pagos]
+    C[Courier]
+    F[Sistema antifraude]
+    N[Sistema de notificaciones]
+  end
+
+  subgraph Casos_de_Uso
+    UC04((UC04 Checkout y Pago))
+    UC08((UC08 Administrar Pedidos))
+    UC10((UC10 Notificaciones Transaccionales))
+  end
+
+  P --- UC04
+  F --- UC04
+  C --- UC08
+  N --- UC10
